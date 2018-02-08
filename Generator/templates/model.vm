@@ -1,0 +1,25 @@
+package qy.stage.model;
+
+/**
+* $table.TableName
+* $table.SchemaName
+* $table.Rows
+* $table.HasPrimaryKey
+*/
+public class $table.TableName {
+    #foreach($col in $columns)
+        $col.ColumnID;
+        $col.AsPrimaryKey;
+        $col.ColumnName;
+        $col.ColumnType;
+        $col.AsType;
+        $col.ByteLength;
+        $col.CharLength;
+        $col.Scale;
+        $col.AllowIdentity;
+        $col.AllowNullable
+        $col.Remark
+/*----------------------------------------------------*/
+    public $col.AsType $col.ColumnName;
+    #end
+}
