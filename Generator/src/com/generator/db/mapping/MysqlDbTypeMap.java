@@ -14,29 +14,30 @@ public class MysqlDbTypeMap implements IDbTypeMap {
         String javaType = "Object";
         switch (sqlType) {
             case "bit":
-                javaType = "Boolean";
+                javaType = "boolean";
                 break;
             case "tinyint":
-                javaType = "Byte";
+                javaType = "byte";
                 break;
             case "smallint":
-                javaType = "Short";
+                javaType = "short";
                 break;
+            case "mediumint":
             case "int":
-                javaType = "Int";
+                javaType = "int";
                 break;
             case "bigint":
-                javaType = "Long";
+                javaType = "long";
                 break;
             case "float":
-                javaType = "Float";
+                javaType = "float";
                 break;
             case "decimal":
             case "numeric":
             case "real":
             case "money":
             case "smallmoney":
-                javaType = "Double";
+                javaType = "double";
                 break;
             case "varchar":
             case "nvarchar":

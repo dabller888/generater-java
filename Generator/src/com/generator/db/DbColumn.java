@@ -5,15 +5,24 @@ import com.generator.db.mapping.MysqlDbTypeMap;
 
 /**
  * Created by Administrator on 2018/1/9.
+ *
+ * 总结：
+ * 1. javabean属性命名尽量使用常规的驼峰式命名规则
+ * 2. 属性名第一个单词尽量避免使用一个字母：如eBook， eMail。
+ * 3. boolean属性名避免使用 “is” 开头的名称
+ * 4. 随着jdk， eclipse， spring 等软件版本的不断提高， 底版本的出现的问题可能在高版本中解决了， 低版本原来正常的代码可能在高版本环境下不再支持。
+ *
  */
 public class DbColumn {
     private int columnID;
     private boolean asPrimaryKey;
     private String columnName;
+    private String lowerColumnName;
+    private String upperColumnName;
     private String columnType;
     private String asType;
-    private int byteLength;
-    private int charLength;
+    private long byteLength;
+    private long charLength;
     private int scale;
     private boolean allowIdentity;
     private boolean allowNullable;
@@ -43,6 +52,22 @@ public class DbColumn {
         this.columnName = columnName;
     }
 
+    public String getLowerColumnName() {
+        return lowerColumnName;
+    }
+
+    public void setLowerColumnName(String lowerColumnName) {
+        this.lowerColumnName = ConfigInfo.toLowerTitle(lowerColumnName);
+    }
+
+    public String getUpperColumnName() {
+        return upperColumnName;
+    }
+
+    public void setUpperColumnName(String upperColumnName) {
+        this.upperColumnName = ConfigInfo.toUpperTitle(upperColumnName);
+    }
+
     public String getColumnType() {
         return columnType;
     }
@@ -60,19 +85,19 @@ public class DbColumn {
         this.asType = map.mapJavaType(columnType);
     }
 
-    public int getByteLength() {
+    public long getByteLength() {
         return byteLength;
     }
 
-    public void setByteLength(int byteLength) {
+    public void setByteLength(long byteLength) {
         this.byteLength = byteLength;
     }
 
-    public int getCharLength() {
+    public long getCharLength() {
         return charLength;
     }
 
-    public void setCharLength(int charLength) {
+    public void setCharLength(long charLength) {
         this.charLength = charLength;
     }
 

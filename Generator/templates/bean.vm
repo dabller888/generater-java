@@ -1,0 +1,26 @@
+package qy.stage.bean;
+
+/**
+* 文件名：$copyright.FileName
+* 功能描述：$copyright.Remark
+* 作者：$copyright.Author
+* 创建时间：$copyright.CreateTime
+* 版本：$copyright.Version
+* 版权信息：$copyright.CpRemark
+*/
+public class $table.UpperTableName {
+#foreach($col in $columns)
+    private $col.AsType $col.LowerColumnName;
+#end
+
+#foreach($col in $columns)
+    public $col.AsType get${col.UpperColumnName}() {
+        return $col.lowerColumnName;
+    }
+	
+    public $col.AsType set${col.UpperColumnName}($col.AsType $col.lowerColumnName) {
+        this.$col.lowerColumnName = $col.lowerColumnName;
+    }
+
+#end
+}

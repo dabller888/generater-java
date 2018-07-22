@@ -1,1 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<databases>
+
+    <database key="mysql">
+        <attr name="DbType" value="mysql"/>
+        <attr name="Server" value="127.0.0.1"/>
+        <attr name="Port" value="3306"/>
+        <attr name="DbName" value="test"/>
+        <attr name="User" value="root"/>
+        <attr name="Passwd" value="root"/>
+        <attr name="Enable" value="true"/>
+    </database>
+
+    <database key="mssql">
+        <attr name="DbType" value="mssql"/>
+        <attr name="Server" value="127.0.0.1"/>
+        <attr name="Port" value="1433"/>
+        <attr name="DbName" value="huanqiu"/>
+        <attr name="User" value="root"/>
+        <attr name="Passwd" value="root"/>
+        <attr name="Enable" value="true"/>
+    </database>
+
+    <database key="oracle">
+        <attr name="DbType" value="oracle"/>
+        <attr name="Server" value="127.0.0.1"/>
+        <attr name="Port" value="3306"/>
+        <attr name="DbName" value="huanqiu"/>
+        <attr name="User" value="root"/>
+        <attr name="Passwd" value="root"/>
+        <attr name="Enable" value="true"/>
+    </database>
+
+</databases>

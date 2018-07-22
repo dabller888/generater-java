@@ -1,10 +1,14 @@
 package com.generator.db;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2018/1/9.
  */
 public class DbTable {
     private String tableName;
+    private String lowerTableName;
+    private String upperTableName;
     private String schemaName;
     private int rows;
     private boolean hasPrimaryKey;
@@ -15,6 +19,22 @@ public class DbTable {
 
     public void setTableName(String tableName) {
         this.tableName = tableName;
+    }
+
+    public String getLowerTableName() {
+        return lowerTableName;
+    }
+
+    public void setLowerTableName(String lowerTableName) {
+        this.lowerTableName = ConfigInfo.toLowerTitleByClass(lowerTableName);
+    }
+
+    public String getUpperTableName() {
+        return upperTableName;
+    }
+
+    public void setUpperTableName(String upperTableName) {
+        this.upperTableName = ConfigInfo.toUpperTitleByClass(upperTableName);
     }
 
     public String getSchemaName() {

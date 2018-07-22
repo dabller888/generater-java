@@ -15,9 +15,9 @@ import java.util.List;
  * Created by Administrator on 2018/1/21.
  */
 public class MysqlDbHelper implements IDbHelper {
-    public Connection con = null;
-    public PreparedStatement pmt = null;
-    public ResultSet result = null;
+    private Connection con = null;
+    private PreparedStatement pmt = null;
+    private ResultSet result = null;
 
     @Override
     public List<DbTable> getDbTables(String Schema) {
@@ -39,6 +39,7 @@ public class MysqlDbHelper implements IDbHelper {
                 "              )as primarykey\n" +
                 "            from information_schema.TABLES t2\n" +
                 "            where t2.TABLE_SCHEMA=?;");
+
         try {
             pmt = con.prepareStatement(sb.toString());
             pmt.setString(1, Schema);
@@ -46,10 +47,13 @@ public class MysqlDbHelper implements IDbHelper {
             DbTable table = null;
             while (result.next()) {
                 table = new DbTable();
-                table.setSchemaName(result.getString("schemname"));
                 table.setTableName(result.getString("tablename"));
+                table.setLowerTableName(result.getString("tablename"));
+                table.setUpperTableName(result.getString("tablename"));
+                table.setSchemaName(result.getString("schemname"));
                 table.setRows(result.getInt("rows"));
                 table.setHasPrimaryKey(result.getBoolean("primarykey"));
+                //table.setColumns(this.getTableColumns(result.getString("tablename"),Schema));
                 tables.add(table);
             }
 
@@ -77,7 +81,7 @@ public class MysqlDbHelper implements IDbHelper {
                 "      information_schema.KEY_COLUMN_USAGE c2\n" +
                 "    where\n" +
                 "      c1.TABLE_NAME=c2.TABLE_NAME and c1.CONSTRAINT_TYPE='PRIMARY KEY' and\n" +
-                "      c1.TABLE_SCHEMA='"+schema+"' and c1.TABLE_NAME='"+tableName+"' and c2.COLUMN_NAME=t1.COLUMN_NAME\n" +
+                "      c1.TABLE_SCHEMA='" + schema + "' and c1.TABLE_NAME='" + tableName + "' and c2.COLUMN_NAME=t1.COLUMN_NAME\n" +
                 "  )as IsPrimaryKey,\n" +
                 "  (case when t1.IS_NULLABLE='YES' then 1 else 0 end) as IsNullable,\n" +
                 "  (case when t1.EXTRA='auto_increment' then 1 else 0 end)as IsIdentity,\n" +
@@ -108,12 +112,14 @@ public class MysqlDbHelper implements IDbHelper {
                 column.setColumnID(result.getInt("ColumnID"));
                 column.setAsPrimaryKey(result.getBoolean("IsPrimaryKey"));
                 column.setColumnName(result.getString("ColumnName"));
+                column.setLowerColumnName(result.getString("ColumnName"));
+                column.setUpperColumnName(result.getString("ColumnName"));
                 column.setColumnType(result.getString("ColumnType"));
                 column.setAsType(result.getString("ColumnType"));
                 column.setAllowIdentity(result.getBoolean("IsIdentity"));
                 column.setAllowNullable(result.getBoolean("IsNullable"));
-                column.setByteLength(result.getInt("ByteLength"));
-                column.setCharLength(result.getInt("CharLength"));
+                column.setByteLength(result.getLong("ByteLength"));
+                column.setCharLength(result.getLong("CharLength"));
                 column.setScale(result.getInt("Scale"));
                 column.setRemark(result.getString("Remark"));
                 columns.add(column);
